@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Numbers Game</title>
+	</head>
+	<body style="text-align: center;">
+		<h1>Welcome to the Great Number Game!</h1>
+		<h4>I am thinking of a number between 1 and 100</h4>
+		<h4>Take a guess!</h4>
+		<br>
+		{% if session['guess'] != '' %}
+			{% if session['guess'] == session['num'] %}
+				<div style="height: 170px; width: 170px; background-color: green; text-align: center; padding: 15px; margin: auto;">
+					<h1> {{ session['num'] }} was the number!</h1>
+					<form action="/playagain" method="post">
+						<input type="submit" name="playagain" value="Play again!">
+					</form>
+				</div>
+			{% endif %}
+			{% if session['guess'] > session['num'] %}
+				<div style="height: 170px; width: 170px; background-color: red; text-align: center; padding: 15px; margin: auto;">
+					<h1> Too High!</h1>
+				</div>
+			{% endif %}
+			{% if session['guess'] < session['num'] %}
+				<div style="height: 170px; width: 170px; background-color: red; text-align: center; padding: 15px; margin: auto;">
+					<h1> Too Low!</h1>
+				</div>
+			{% endif %}
+		{% endif %}
+		<form action="/result" method="post" style="margin-top: 10px;">
+			<input type="text" name="guess">
+			<input type="submit" name="takeguess">
+		</form>
+	</body>
+</html>
